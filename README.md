@@ -19,7 +19,7 @@ It was created using:
 
 ## 🌐 Demo
 
-> _(You can add your deployed link here after hosting it via GitHub Pages & Cloudflare)_
+[Website](https://nayanti.com.np/)
 
 ## 🚀 Deployment
 
