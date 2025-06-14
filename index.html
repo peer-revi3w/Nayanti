@@ -310,6 +310,9 @@
     </style>
 </head>
 <body>
+    <audio id="player" autoplay loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
     <div class="wooden-desk"></div>
     
     <div class="envelope" onclick="openLetter()">
@@ -347,6 +350,20 @@
     </div>
 
     <script>
+        const audio = document.getElementById("player");
+        audio.volume = 0; // Start muted
+        audio.play();
+
+        let targetVolume = 0.5;  // Final volume
+        let fadeSpeed = 200;     // Every 200ms increase volume
+        let volumeStep = 0.01;   // Increase by 0.01 each step
+        let fadeIn = setInterval(() => {
+          if (audio.volume < targetVolume) {
+            audio.volume = Math.min(audio.volume + volumeStep, targetVolume);
+          } else {
+            clearInterval(fadeIn); // Stop when target volume reached
+          }
+        }, fadeSpeed);
         function openLetter() {
             document.querySelector('.envelope').style.display = 'none';
             document.getElementById('letter').style.display = 'block';
