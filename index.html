@@ -310,7 +310,7 @@
     </style>
 </head>
 <body>
-    <audio id="player" autoplay loop>
+    <audio id="player" loop>
         <source src="./music.mp3" type="audio/mpeg">
     </audio>
     <div class="wooden-desk"></div>
@@ -350,30 +350,30 @@
     </div>
 
     <script>
-        const audio = document.getElementById("player");
-        audio.volume = 0; // Start muted
-        audio.play();
-
-        let targetVolume = 0.5;  // Final volume
-        let fadeSpeed = 200;     // Every 200ms increase volume
-        let volumeStep = 0.01;   // Increase by 0.01 each step
-        let fadeIn = setInterval(() => {
-          if (audio.volume < targetVolume) {
-            audio.volume = Math.min(audio.volume + volumeStep, targetVolume);
-          } else {
-            clearInterval(fadeIn); // Stop when target volume reached
-          }
-        }, fadeSpeed);
         function openLetter() {
             document.querySelector('.envelope').style.display = 'none';
             document.getElementById('letter').style.display = 'block';
-            
-            // Add a subtle page turn sound effect simulation
+
+            // Start audio after user click
+            const audio = document.getElementById("player");
+            audio.volume = 0;
+            audio.play();
+
+            let targetVolume = 0.5;
+            let fadeSpeed = 200;
+            let volumeStep = 0.01;
+            let fadeIn = setInterval(() => {
+              if (audio.volume < targetVolume) {
+                audio.volume = Math.min(audio.volume + volumeStep, targetVolume);
+              } else {
+                clearInterval(fadeIn);
+              }
+            }, fadeSpeed);
+        
             setTimeout(() => {
                 document.body.style.background = 'linear-gradient(135deg, #f4f1ea 0%, #faf8f3 50%, #fff 100%)';
             }, 600);
-            
-            // Animate handwriting effect
+        
             setTimeout(() => {
                 const words = document.querySelectorAll('.word');
                 words.forEach((word, index) => {
@@ -383,8 +383,8 @@
                         word.style.animation = 'handwrite 0.3s ease-in-out';
                     }, index * 50);
                 });
-            }, 1000);
-        }
-    </script>
+        }, 1000);
+}
+</script>
 </body>
 </html>
